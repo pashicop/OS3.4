@@ -187,3 +187,11 @@ vagrant@vagrant:~$ cat /proc/sys/kernel/pid_max
 vagrant@vagrant:~$ ulimit -u
 5700
 ```
+`cgroup - control group based traffic control filter`
+```
+vagrant@vagrant:~$ ulimit -u
+5700
+vagrant@vagrant:~$ ulimit -u 5699
+vagrant@vagrant:~$ ulimit -u
+5699
+```
