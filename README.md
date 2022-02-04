@@ -1,6 +1,6 @@
 # OS3.4
 # 1
-Создал unit файл `/etc/systemd/system/node_exporter.service`, создал пользователя, от которого будет запускаться сервис, добавил в автозагрузку с помощью `systemctl enable node_exporter` и добавил `EnvironmentFile=/home/vagrant/args` в который занёс аргумент `--web.listen-address=":9101"`, запускающий сервис на порту 9101. Всё работает! Ниже листинг  
+Создал unit файл `/etc/systemd/system/node_exporter.service`, создал пользователя, от которого будет запускаться сервис, добавил в автозагрузку с помощью `systemctl enable node_exporter` и добавил `EnvironmentFile=/home/vagrant/args` в который занёс аргумент `--web.listen-address=":9101"`, запускающий сервис на порту 9101. После перезагрузки всё работает! Ниже листинг  
 ```
 vagrant@vagrant:~$ cat args
 one=--web.listen-address=":9101"
@@ -141,7 +141,8 @@ node_memory_MemFree_bytes 9.26015488e+08
 vagrant@vagrant:~$ sudo sysctl -a | grep fs.nr_open
 fs.nr_open = 1048576
 ```
-Указывает на максимальное количество открытых файловых дескрипторов (ограничение системы). `ulimit -n` показывает мягкие ограниения для текущей сессии `bash`
+Указывает на максимальное количество открытых файловых дескрипторов (ограничение системы).  
+`ulimit -n` показывает мягкие ограничения для текущей сессии `bash`.
 ```
 vagrant@vagrant:~$ ulimit -n
 1024
@@ -178,7 +179,7 @@ root          14  0.0  0.2   8892  3404 pts/0    R+   22:04   0:00 ps aux
 root@vagrant:/#
 ```
 # 7
-Это fork-бомба, запускающих два своих экземпляра и тд
+Это fork-бомба, запускающих два своих экземпляра и тд  
 В `dmesg` находим
 `[ 4195.927611] cgroup: fork rejected by pids controller in /user.slice/user-1000.slice/session-5.scope`
 ```
@@ -187,7 +188,7 @@ vagrant@vagrant:~$ cat /proc/sys/kernel/pid_max
 vagrant@vagrant:~$ ulimit -u
 5700
 ```
-`cgroup - control group based traffic control filter`
+`cgroup - control group based traffic control filter` Механизм linux ядра для управления лимитами ресурсов процессами и мониторинга за ними.
 ```
 vagrant@vagrant:~$ ulimit -u
 5700
